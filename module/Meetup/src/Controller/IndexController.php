@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Cinema\Controller;
+namespace Meetup\Controller;
 
-use Cinema\Entity\Film;
-use Cinema\Repository\FilmRepository;
-use Cinema\Form\FilmForm;
+use Meetup\Entity\Meetup;
+use Meetup\Repository\FilmRepository;
+use Meetup\Form\FilmForm;
 use Zend\Http\PhpEnvironment\Request;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;

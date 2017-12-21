@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use Cinema\Form\FilmForm;
+use Meetup\Form\FilmForm;
 use Zend\Router\Http\Literal;
-use Cinema\Controller;
+use Meetup\Controller;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
@@ -46,14 +46,14 @@ return [
     ],
     'view_manager' => [
         'template_map' => [
-            'cinema/index/index' => __DIR__ . '/../view/cinema/index/index.phtml',
-            'cinema/index/add' => __DIR__ . '/../view/cinema/index/add.phtml',
+            'Meetup/index/index' => __DIR__ . '/../view/Meetup/index/index.phtml',
+            'Meetup/index/add' => __DIR__ . '/../view/Meetup/index/add.phtml',
         ],
     ],
     'doctrine' => [
         'driver' => [
             // defines an annotation driver with two paths, and names it `my_annotation_driver`
-            'cinema_driver' => [
+            'Meetup_driver' => [
                 'class' => \Doctrine\ORM\Mapping\Driver\AnnotationDriver::class,
                 'cache' => 'array',
                 'paths' => [
@@ -66,7 +66,7 @@ return [
             'orm_default' => [
                 'drivers' => [
                     // register `application_driver` for any entity under namespace `Application\Entity`
-                    'Cinema\Entity' => 'cinema_driver',
+                    'Meetup\Entity' => 'Meetup_driver',
                 ],
             ],
         ],

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Cinema\Repository;
 
-use Cinema\Entity\Film;
+use Cinema\Entity\Meetup;
 use Doctrine\ORM\EntityRepository;
 
 final class FilmRepository extends EntityRepository
@@ -18,6 +18,6 @@ final class FilmRepository extends EntityRepository
 
     public function createFilmFromNameAndDescription(string $name, string $description)
     {
-        return new Film($name, $description);
+        return new Meetup($name, $description);
     }
 }
