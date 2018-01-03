@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
+
 namespace Meetup\Form;
+
 use Meetup\Entity\Meetup;
 use Doctrine\ORM\EntityManager;
 use Zend\Form\Element;
@@ -8,6 +10,7 @@ use Zend\Form\Form;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Validator\StringLength;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
+
 class MeetupForm extends Form implements InputFilterProviderInterface
 {
     public function __construct(EntityManager $entityManager)
@@ -34,12 +37,8 @@ class MeetupForm extends Form implements InputFilterProviderInterface
             'name' => 'startedAt',
             'options' => [
                 'label' => 'Start date',
-                'format' => 'd-m-Y',
             ],
             'attributes' => [
-                'min' => (new \DateTimeImmutable())->format('d-m-Y'),
-                'max' => (new \DateTimeImmutable())->add(new \DateInterval('P4Y'))->format('d-m-Y'),
-                'step' => '1', // days; default step interval is 1 day
             ],
         ]);
         $this->add([
@@ -47,12 +46,16 @@ class MeetupForm extends Form implements InputFilterProviderInterface
             'name' => 'endedAt',
             'options' => [
                 'label' => 'End date',
-                'format' => 'd-m-Y',
             ],
             'attributes' => [
-                'min' => (new \DateTimeImmutable())->format('d-m-Y'),
-                'max' => (new \DateTimeImmutable())->add(new \DateInterval('P4Y'))->format('d-m-Y'),
-                'step' => '1', // days; default step interval is 1 day
+            ],
+        ]);
+
+        $this->add([
+            'type' => Element\Submit::class,
+            'name' => 'submit',
+            'attributes' => [
+                'value' => 'Add a Meeting'
             ],
         ]);
     }

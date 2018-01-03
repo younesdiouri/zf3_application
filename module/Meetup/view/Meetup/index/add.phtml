@@ -7,7 +7,9 @@
 <?= $this->form()->openTag($form); ?>
 
 <?= $this->formRow($form->get('title')) ?>
-
+<?= $this->formRow($form->get('description')) ?>
+<?= $this->formRow($form->get('startedAt')) ?>
+<?= $this->formRow($form->get('endedAt')) ?>
 <?= $this->formInput($form->get('submit')) ?>
 
 <?= $this->form()->closeTag($form); ?>

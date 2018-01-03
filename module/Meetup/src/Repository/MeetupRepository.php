@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Cinema\Repository;
+namespace Meetup\Repository;
 
 use Meetup\Entity\Meetup;
 use Doctrine\ORM\EntityRepository;

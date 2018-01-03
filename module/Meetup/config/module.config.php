@@ -3,8 +3,10 @@
 declare(strict_types=1);
 
 use Meetup\Form\MeetupForm;
+use Meetup\Form\MeetupFormFactory;
 use Zend\Router\Http\Literal;
 use Meetup\Controller;
+use Meetup\Controller\IndexControllerFactory;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
@@ -36,18 +38,18 @@ return [
     ],
     'controllers' => [
         'factories' => [
-            Controller\IndexController::class => Controller\IndexControllerFactory::class,
+            Controller\IndexController::class => IndexControllerFactory::class,
         ],
     ],
     'service_manager' => [
         'factories' => [
-            MeetupForm::class => InvokableFactory::class,
+            MeetupForm::class => MeetupFormFactory::class,
         ],
     ],
     'view_manager' => [
         'template_map' => [
-            'Meetup/index/index' => __DIR__ . '/../view/Meetup/index/index.phtml',
-            'Meetup/index/add' => __DIR__ . '/../view/Meetup/index/add.phtml',
+            'meetup/index/index' => __DIR__ . '/../view/Meetup/index/index.phtml',
+            'meetup/index/add' => __DIR__ . '/../view/Meetup/index/add.phtml',
         ],
     ],
     'doctrine' => [

@@ -57,6 +57,10 @@ class Meetup
     {
         return $this->title;
     }
+    public function setTitle(string $title) :void
+    {
+        $this->title = $title;
+    }
 
     public function getDescription() : string
     {
