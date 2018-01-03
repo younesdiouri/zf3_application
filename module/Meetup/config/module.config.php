@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Meetup\Form\FilmForm;
+use Meetup\Form\MeetupForm;
 use Zend\Router\Http\Literal;
 use Meetup\Controller;
 use Zend\ServiceManager\Factory\InvokableFactory;
@@ -10,10 +10,10 @@ use Zend\ServiceManager\Factory\InvokableFactory;
 return [
     'router' => [
         'routes' => [
-            'films' => [
+            'meetups' => [
                 'type' => Literal::class,
                 'options' => [
-                    'route'    => '/films',
+                    'route'    => '/meetups',
                     'defaults' => [
                         'controller' => Controller\IndexController::class,
                         'action'     => 'index',
@@ -41,7 +41,7 @@ return [
     ],
     'service_manager' => [
         'factories' => [
-            FilmForm::class => InvokableFactory::class,
+            MeetupForm::class => InvokableFactory::class,
         ],
     ],
     'view_manager' => [

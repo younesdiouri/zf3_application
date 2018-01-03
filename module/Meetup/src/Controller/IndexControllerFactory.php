@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Cinema\Controller;
+namespace Meetup\Controller;
 
-use Cinema\Entity\Meetup;
-use Cinema\Form\FilmForm;
+use Meetup\Entity\Meetup;
+use Meetup\Form\MeetupForm;
 use Doctrine\ORM\EntityManager;
 use Psr\Container\ContainerInterface;
 
@@ -13,9 +13,9 @@ final class IndexControllerFactory
 {
     public function __invoke(ContainerInterface $container) : IndexController
     {
-        $filmRepository = $container->get(EntityManager::class)->getRepository(Meetup::class);
-        $filmForm = $container->get(FilmForm::class);
+        $MeetupRepository = $container->get(EntityManager::class)->getRepository(Meetup::class);
+        $MeetupForm = $container->get(MeetupForm::class);
 
-        return new IndexController($filmRepository, $filmForm);
+        return new IndexController($MeetupRepository, $MeetupForm);
     }
 }

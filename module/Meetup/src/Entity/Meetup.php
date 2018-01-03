@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class Meetup
  * @package Application\Entity
- * @ORM\Entity(repositoryClass="\Meetup\Repository\FilmRepository")
+ * @ORM\Entity(repositoryClass="\Meetup\Repository\MeetupRepository")
  * @ORM\Table(name="meetups")
  */
 class Meetup
