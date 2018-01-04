@@ -45,14 +45,16 @@ final class IndexController extends AbstractActionController
         if ($request->isPost()) {
             $form->setData($request->getPost());
             if ($form->isValid()) {
+                $statedAt = \DateTimeImmutable::createFromFormat('Y-m-d',$form->getData()['startedAt']);
+                $endedAt = \DateTimeImmutable::createFromFormat('Y-m-d',$form->getData()['endedAt']);
                 $Meetup = $this->MeetupRepository->createMeetupFromNameAndDescription(
                     $form->getData()['title'],
                     $form->getData()['description'] ?? '',
-                    $form->getData()['startedAt'],
-                    $form->getData()['endedAt']
+                    $statedAt,
+                    $endedAt
                 );
                 $this->MeetupRepository->add($Meetup);
-                return $this->redirect()->toRoute('Meetups');
+                return $this->redirect()->toRoute('meetups');
             }
         }
 
