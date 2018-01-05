@@ -50,8 +50,8 @@ final class IndexController extends AbstractActionController
                 $Meetup = $this->MeetupRepository->createMeetupFromNameAndDescription(
                     $form->getData()['title'],
                     $form->getData()['description'] ?? '',
-                    $statedAt,
-                    $endedAt
+                    $form->getData()['startedAt'],
+                    $form->getData()['endedAt']
                 );
                 $this->MeetupRepository->add($Meetup);
                 return $this->redirect()->toRoute('meetups');

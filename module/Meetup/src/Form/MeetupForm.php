@@ -73,6 +73,26 @@ class MeetupForm extends Form implements InputFilterProviderInterface
                     ],
                 ],
             ],
+            'startedAt' => [
+                'filters' => [
+                    [
+                        'name' => 'Zend\Filter\DatetimeFormatter',
+                        'options' => [
+                            'format' => 'Y-m-d',
+                        ],
+                    ]
+                ]
+            ],
+            'endedAt' => [
+                'filters' => [
+                    [
+                        'name' => 'Zend\Filter\DatetimeFormatter',
+                        'options' => [
+                            'format' => 'Y-m-d',
+                        ],
+                    ]
+                ]
+            ],
         ];
     }
 }
