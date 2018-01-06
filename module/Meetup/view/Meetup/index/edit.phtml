@@ -1,0 +1,29 @@
+<h1>Edit</h1>
+
+<?php
+$form = $this->form; /* @var $form \Zend\Form\Form */
+?>
+
+<?= $this->form()->openTag($form); ?>
+
+<?= $this->formRow($form->get('title')->setAttribute('class', 'form-control')); ?>
+
+<br>
+
+<?= $this->formRow($form->get('description')->setAttribute('class', 'form-control')
+    ->setAttribute('rows', '10')
+    ->setAttribute('cols', '50')) ?>
+
+<br>
+
+<?= $this->formRow($form->get('startedAt')->setAttribute('class', 'form-control')); ?>
+
+<br>
+
+<?= $this->formRow($form->get('endedAt')->setAttribute('class', 'form-control')); ?>
+
+<br>
+
+<?= $this->formInput($form->get('submit')->setAttribute('class', 'btn btn-primary')) ?>
+
+<?= $this->form()->closeTag($form); ?>

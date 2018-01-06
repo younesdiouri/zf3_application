@@ -2,7 +2,14 @@
 
 <ul>
     <?php foreach ($this->Meetups as $Meetup): /* @var $Meetup \Meetup\Entity\Meetup */ ?>
-    <li><?= $Meetup->getTitle() ?></li>
+    <li>
+        <?= $Meetup->getTitle() ?>
+        <form action="<?php echo $this->url('meetups/delete'); ?>" method="post">
+            <input type="hidden" name="id" value="<?php echo $Meetup->getId(); ?>">
+            <button class="btn btn-danger" type="submit">Remove</button>
+        </form>
+        <a class="btn btn-info" href="<?= $this->url('meetups/edit', ['id' => $Meetup->getId()]); ?>"></a>
+    </li>
     <?php endforeach; ?>
 </ul>
 

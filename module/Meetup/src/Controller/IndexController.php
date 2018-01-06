@@ -44,7 +44,7 @@ final class IndexController extends AbstractActionController
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
-                $this->MeetupRepository->add($form->getData());
+                $this->MeetupRepository->save($form->getData());
                 return $this->redirect()->toRoute('meetups');
             }
         }
@@ -53,6 +53,45 @@ final class IndexController extends AbstractActionController
 
         return new ViewModel([
             'form' => $form,
+        ]);
+    }
+
+    public function deleteAction()
+    {
+
+        /** @var Request $request */
+        $request = $this->getRequest();
+
+        /** @var string $id */
+        $id = (string)$request->getPost('id');
+        if (empty($id)) {
+            die("database delete error");
+        }
+        $this->MeetupRepository->delete($id);
+
+        return $this->redirect()->toRoute('meetups');
+    }
+
+    public function editAction()
+    {
+        $form = $this->MeetupForm;
+        $id = $this->params()->fromRoute('id');
+        $meetup = $this->MeetupRepository->find($id);
+        $form->bind($meetup);
+        /* @var $request Request */
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $form->setData($request->getPost());
+
+            if ($form->isValid()) {
+                $this->MeetupRepository->save($form->getData());
+                return $this->redirect()->toRoute('meetups');
+            }
+        }
+        $form->prepare();
+        return new ViewModel([
+            'form' => $form,
+            'meetup' => $meetup,
         ]);
     }
 }

@@ -11,14 +11,24 @@ use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 final class MeetupRepository extends EntityRepository
 {
 
-    public function add($Meetup) : void
+    public function save($Meetup) : void
     {
-
-        $createMeetup = new Meetup();
-        /** @var DoctrineHydrator $hydrator */
-        $hydrator = new DoctrineHydrator($this->getEntityManager());
-        $hydrator->hydrate($Meetup, $createMeetup);
+        if ($Meetup->getId()) {
+            $createMeetup = $this->find($Meetup->getId());
+        }
+        else{
+            $createMeetup = new Meetup();
+            /** @var DoctrineHydrator $hydrator */
+            $hydrator = new DoctrineHydrator($this->getEntityManager());
+            $hydrator->hydrate($Meetup, $createMeetup);
+        }
         $this->getEntityManager()->persist($createMeetup);
         $this->getEntityManager()->flush($createMeetup);
+    }
+
+    public function delete(string $id): void
+    {
+        $this->getEntityManager()->remove($this->find($id));
+        $this->getEntityManager()->flush();
     }
 }

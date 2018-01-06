@@ -49,6 +49,13 @@ class Meetup
     /**
      * @return string
      */
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
     public function getTitle() : string
     {
         return $this->title;
