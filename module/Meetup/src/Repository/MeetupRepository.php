@@ -6,18 +6,19 @@ namespace Meetup\Repository;
 
 use Meetup\Entity\Meetup;
 use Doctrine\ORM\EntityRepository;
+use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
 final class MeetupRepository extends EntityRepository
 {
 
     public function add($Meetup) : void
     {
-        $this->getEntityManager()->persist($Meetup);
-        $this->getEntityManager()->flush($Meetup);
-    }
 
-    public function createMeetupFromNameAndDescription(string $name, string $description, \DateTimeImmutable $startedAt, \DateTimeImmutable $endedAt)
-    {
-        return new Meetup($name, $description, $startedAt, $endedAt);
+        $createMeetup = new Meetup();
+        /** @var DoctrineHydrator $hydrator */
+        $hydrator = new DoctrineHydrator($this->getEntityManager());
+        $hydrator->hydrate($Meetup, $createMeetup);
+        $this->getEntityManager()->persist($createMeetup);
+        $this->getEntityManager()->flush($createMeetup);
     }
 }

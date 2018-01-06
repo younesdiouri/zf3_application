@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Meetup\Controller;
 
-use Meetup\Entity\Meetup;
 use Meetup\Repository\MeetupRepository;
 use Meetup\Form\MeetupForm;
 use Zend\Http\PhpEnvironment\Request;
@@ -39,21 +38,13 @@ final class IndexController extends AbstractActionController
     public function addAction()
     {
         $form = $this->MeetupForm;
-
         /* @var $request Request */
         $request = $this->getRequest();
         if ($request->isPost()) {
             $form->setData($request->getPost());
+
             if ($form->isValid()) {
-                $statedAt = \DateTimeImmutable::createFromFormat('Y-m-d',$form->getData()['startedAt']);
-                $endedAt = \DateTimeImmutable::createFromFormat('Y-m-d',$form->getData()['endedAt']);
-                $Meetup = $this->MeetupRepository->createMeetupFromNameAndDescription(
-                    $form->getData()['title'],
-                    $form->getData()['description'] ?? '',
-                    $form->getData()['startedAt'],
-                    $form->getData()['endedAt']
-                );
-                $this->MeetupRepository->add($Meetup);
+                $this->MeetupRepository->add($form->getData());
                 return $this->redirect()->toRoute('meetups');
             }
         }

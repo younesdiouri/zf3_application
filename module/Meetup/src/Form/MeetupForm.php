@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManager;
 use Zend\Form\Element;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\Validator\Date;
 use Zend\Validator\StringLength;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
@@ -15,7 +16,7 @@ class MeetupForm extends Form implements InputFilterProviderInterface
 {
     public function __construct(EntityManager $entityManager)
     {
-        parent::__construct('Meetup');
+        parent::__construct('meetup');
         $hydrator = new DoctrineHydrator($entityManager, Meetup::class);
         $this->setHydrator($hydrator);
         $this->add([
@@ -74,6 +75,11 @@ class MeetupForm extends Form implements InputFilterProviderInterface
                 ],
             ],
             'startedAt' => [
+                'validators' => [
+                    [
+                        'name' => Date::class,
+                    ],
+                ],
                 'filters' => [
                     [
                         'name' => 'Zend\Filter\DatetimeFormatter',
@@ -84,6 +90,11 @@ class MeetupForm extends Form implements InputFilterProviderInterface
                 ]
             ],
             'endedAt' => [
+                'validators' => [
+                    [
+                        'name' => Date::class,
+                    ],
+                ],
                 'filters' => [
                     [
                         'name' => 'Zend\Filter\DatetimeFormatter',

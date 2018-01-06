@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class Meetup
- * @package Application\Entity
+ * @package Meetup\Entity
  * @ORM\Entity(repositoryClass="\Meetup\Repository\MeetupRepository")
  * @ORM\Table(name="meetups")
  */
@@ -41,13 +41,9 @@ class Meetup
      */
     private $endedAt;
 
-    public function __construct(string $title, string $description = '', \DateTimeImmutable $startedAt, \DateTimeImmutable $endedAt)
+    public function __construct()
     {
         $this->id = Uuid::uuid4()->toString();
-        $this->title = $title;
-        $this->description = $description;
-        $this->startedAt = $startedAt;
-        $this->endedAt = $endedAt;
     }
 
     /**
@@ -72,22 +68,22 @@ class Meetup
         $this->description = $description;
     }
 
-    public function getStartedAt() : \DateTimeImmutable
+    public function getStartedAt() : \DateTime
     {
         return $this->startedAt;
     }
 
-    public function setStartedAt(\DateTimeImmutable $startedAt) : void
+    public function setStartedAt(\DateTime $startedAt) : void
     {
         $this->startedAt = $startedAt;
     }
 
-    public function getEndedAt() : \DateTimeImmutable
+    public function getEndedAt() : \DateTime
     {
         return $this->endedAt;
     }
 
-    public function setEndedAt(\DateTimeImmutable $endedAt) : void
+    public function setEndedAt(\DateTime $endedAt) : void
     {
         $this->endedAt = $endedAt;
     }
