@@ -13,7 +13,7 @@ final class MeetupRepository extends EntityRepository
 
     public function save($Meetup) : void
     {
-        if ($Meetup->getId()) {
+        if (!is_array($Meetup)) {
             $createMeetup = $this->find($Meetup->getId());
         }
         else{

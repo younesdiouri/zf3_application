@@ -44,8 +44,14 @@ final class IndexController extends AbstractActionController
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
-                $this->MeetupRepository->save($form->getData());
-                return $this->redirect()->toRoute('meetups');
+                    $today = date('now');
+                    if(new \DateTimeImmutable($form->getData()['startedAt'])>= $today
+                    && new \DateTimeImmutable($form->getData()['startedAt']) <
+                        new \DateTimeImmutable($form->getData()['endedAt']))
+                    {
+                        $this->MeetupRepository->save($form->getData());
+                        return $this->redirect()->toRoute('meetups');
+                    }
             }
         }
 

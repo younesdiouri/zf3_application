@@ -1,16 +1,32 @@
 <h1>Meetups</h1>
 
-<ul>
-    <?php foreach ($this->Meetups as $Meetup): /* @var $Meetup \Meetup\Entity\Meetup */ ?>
-    <li>
-        <?= $Meetup->getTitle() ?>
-        <form action="<?php echo $this->url('meetups/delete'); ?>" method="post">
-            <input type="hidden" name="id" value="<?php echo $Meetup->getId(); ?>">
-            <button class="btn btn-danger" type="submit">Remove</button>
-        </form>
-        <a class="btn btn-info" href="<?= $this->url('meetups/edit', ['id' => $Meetup->getId()]); ?>"></a>
-    </li>
-    <?php endforeach; ?>
-</ul>
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Start date</th>
+            <th>End date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($this->Meetups as $Meetup): /* @var $Meetup \Meetup\Entity\Meetup */ ?>
+            <tr>
+                <td><?= $Meetup->getTitle() ?></td>
+                <td><?= $Meetup->getDescription() ?></td>
+                <td><?= date_format($Meetup->getStartedAt(), 'd/m/Y') ?></td>
+                <td><?= date_format($Meetup->getEndedAt(), 'd/m/Y') ?></td>
+                <td><form action="<?php echo $this->url('meetups/delete'); ?>" method="post">
+                        <input type="hidden" name="id" value="<?php echo $Meetup->getId(); ?>">
+                        <button class="btn btn-danger" type="submit">Remove</button>
+                    </form>
+                </td>
+                <td>
+                    <a class="btn btn-info" href="<?= $this->url('meetups/edit', ['id' => $Meetup->getId()]); ?>">Edit</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
 
 <a href="<?= $this->url('meetups/add'); ?>" class="btn btn-primary">Add new</a>
